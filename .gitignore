@@ -1,0 +1,94 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs and results
+*.log
+*.out
+logs/
+outputs/
+results/
+tmp/
+temp/
+*.cache
+
+# Data directories (these are large; released separately)
+data/
+source_dataset/
+visualdoc_edit_bench_data/
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+
+# Large image / weight files
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.tiff
+*.pdf
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+!README*.png
+!docs/**/*.png
+
+# Large JSON / evaluation results
+*_eval_results.json
+*_eval_local_results.json
+ambiguity_scores_*.json
+ambiguity_statistics_*.json
+layout_elements.json
+language_analysis_results.json
+edit_type_analysis_results*.json
+
+# HuggingFace / model caches
+model/
+hf_cache/
+*.bin
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets (must never be committed)
+.env
+.env.local
+secrets.*
+*token*.txt
+*api_key*.txt

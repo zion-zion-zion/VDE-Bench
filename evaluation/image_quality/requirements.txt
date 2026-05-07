@@ -1,0 +1,18 @@
+# Image quality evaluation - additional dependencies
+#
+# These are heavier than the core VDE-Bench requirements, so they live in
+# a separate file; install only when you need image-quality metrics.
+
+numpy>=1.21.0
+Pillow>=9.0.0
+tqdm>=4.64.0
+
+# Core metrics
+scikit-image>=0.19.0
+scipy>=1.7.0
+
+# Deep metrics (LPIPS / FID / CLIP)
+torch>=1.12.0
+torchvision>=0.13.0
+lpips>=0.1.4
+transformers>=4.25.0
