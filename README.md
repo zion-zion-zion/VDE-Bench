@@ -1,4 +1,9 @@
 # VDE-Bench: Visual Document Edit Benchmark
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/pdf/2602.00122v2)
+[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/zionzionzion/vde)
+
+[[Paper]](https://arxiv.org/pdf/2602.00122v2)
+[[Dataset]](https://huggingface.co/datasets/zionzionzion/vde)
 
 **VDE-Bench** is a benchmark for evaluating visual document editing, covering text, tables, and figures in dense document pages with bilingual (English / Chinese) content. It combines automatic text/layout generation, OCR-based evaluation, and perceptual image-quality metrics to provide a holistic view of a model's editing capability.
 
