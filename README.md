@@ -281,10 +281,11 @@ python evaluation/agreement/krippendorff_alpha.py \
 If you find VDE-Bench useful, please cite:
 
 ```bibtex
-@article{vdebench2025,
-  title  = {VDE-Bench: A Benchmark for Visual Document Editing},
-  author = {Anonymous},
-  year   = {2025}
+@article{yi2026vdebench,
+  title   = {VDE Bench: Evaluating The Capability of Image Editing Models to Modify Visual Documents},
+  author  = {Yi, Hongzhu and Yang, Yujia and Wang, Yuanxiang and Guan, Zhenyu and Chen, Jiahuan and Bao, Chenxi and Yang, Tiankun and Yuan, Yixuan and Zong, Tianyu and Wang, Xinming and Yu, Tao and Tao, Ruiwen and Liang, Haijin and Ma, Jin and Luo, Jinwen and Zuo, Yeshani Xinyu and Xu, Jungang},
+  journal = {arXiv preprint arXiv:2602.00122},
+  year    = {2026}
 }
 ```
 
