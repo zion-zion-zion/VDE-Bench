@@ -43,7 +43,7 @@ This repository contains:
 ## Installation
 
 ```bash
-git clone https://github.com/<YOUR_ORG>/vde-bench.git
+git clone https://github.com/zion-zion-zion/VDE-Bench.git
 cd vde-bench
 
 # Core dependencies
