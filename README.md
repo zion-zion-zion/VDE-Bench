@@ -1,5 +1,5 @@
 
-![Vdbench Overview](vdebench_overview.png)
+![Vdbench Overview](vdebench_overview_en.png)
 # VDE-Bench: Visual Document Edit Benchmark
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/pdf/2602.00122v2)
