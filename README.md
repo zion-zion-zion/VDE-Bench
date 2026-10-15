@@ -1,25 +1,25 @@
 
-![Vdbench Overview](vdebench_overview_en.png)
+![VDE-Bench Overview](vdebench_overview_en.png)
 # VDE-Bench: Visual Document Edit Benchmark
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/pdf/2602.00122v2)
-[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/zionzionzion/vde)
+[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
 
 [[Paper]](https://arxiv.org/pdf/2602.00122v2)
-[[Dataset]](https://huggingface.co/datasets/zionzionzion/vde)
+[[Dataset]](https://huggingface.co/datasets/hongzhuyi/VDEBench)
 
-**VDE-Bench** is a benchmark for evaluating visual document editing, covering text, tables, and figures in dense document pages with bilingual (English / Chinese) content. It combines automatic text/layout generation, OCR-based evaluation, and perceptual image-quality metrics to provide a holistic view of a model's editing capability.
+**VDE-Bench** evaluates visual document editing on dense document pages with bilingual (English / Chinese) text, tables, and figures. It combines automatic text and layout generation with OCR-based and perceptual image-quality metrics.
 
 This repository contains:
-1. **Data generation pipeline** (`data_generation/`) — scripts used to build the benchmark by calling a multimodal LLM on source document images (e.g. [OmniDocBench](https://github.com/opendatalab/OmniDocBench)).
-2. **OCR & layout evaluation** (`evaluation/ocr_eval/`) — the main OCR-based benchmark: per-block matching with IoU, CDM, BLEU, TEDS metrics at both *global* and *local (edit-region)* granularities.
-3. **Image-quality evaluation** (`evaluation/image_quality/`) — standard perceptual metrics (PSNR / SSIM / LPIPS / FID / CLIP-Score).
-4. **Layout analysis** (`evaluation/layout_analysis/`) — document layout element extraction and distribution statistics using a vision LLM.
-5. **Annotator-agreement analysis** (`evaluation/agreement/`) — Fleiss' Kappa and Krippendorff's Alpha implementations for human-rating studies.
-6. **Dataset statistics & reports** (`analysis/`) — scripts to plot dataset distributions and render LaTeX tables for the paper.
-7. **OCR backends** (`ocr_backends/`) — example configuration for running PaddleOCR-VL / Hunyuan OCR.
+1. **Data generation pipeline** (`data_generation/`): scripts that build the benchmark by calling a multimodal LLM on source document images such as [OmniDocBench](https://github.com/opendatalab/OmniDocBench).
+2. **OCR and layout evaluation** (`evaluation/ocr_eval/`): the main OCR benchmark, with per-block IoU, CDM, BLEU, and TEDS metrics at both *global* and *local (edit-region)* levels.
+3. **Image-quality evaluation** (`evaluation/image_quality/`): perceptual metrics including PSNR, SSIM, LPIPS, FID, and CLIP Score.
+4. **Layout analysis** (`evaluation/layout_analysis/`): document layout element extraction and distribution statistics using a vision LLM.
+5. **Annotator-agreement analysis** (`evaluation/agreement/`): Fleiss' Kappa and Krippendorff's Alpha implementations for human-rating studies.
+6. **Dataset statistics and reports** (`analysis/`): scripts to plot dataset distributions and render LaTeX tables for the paper.
+7. **OCR backends** (`ocr_backends/`): example configurations for PaddleOCR-VL and Hunyuan OCR.
 
-> The benchmark data itself (images, instructions, OCR outputs, and human labels) is released separately on HuggingFace; this repository only hosts the code.
+> The benchmark data, including images, instructions, OCR outputs, and human labels, is available separately on [Hugging Face](https://huggingface.co/datasets/hongzhuyi/VDEBench). This repository contains the code.
 
 ---
 
@@ -44,7 +44,7 @@ This repository contains:
 
 ```bash
 git clone https://github.com/zion-zion-zion/VDE-Bench.git
-cd vde-bench
+cd VDE-Bench
 
 # Core dependencies
 pip install -r requirements.txt
@@ -61,7 +61,7 @@ Tested with **Python 3.10+**, **PyTorch 2.x**, and **CUDA 11.8 / 12.1**.
 ## Repository Layout
 
 ```
-vde-bench/
+VDE-Bench/
 ├── data_generation/            # Scripts to build the benchmark
 │   ├── prompts.py              # All editing prompts (text / table / figure)
 │   ├── llm_client.py           # Thin OpenAI-compatible client for image-editing & text LLMs
@@ -152,7 +152,7 @@ They can also be passed as CLI flags (`--api_base`, `--api_key`). **Never hard-c
 
 ### 1. Generating the benchmark
 
-From raw source document images + their OCR annotations (OmniDocBench format):
+From raw source document images and their OCR annotations (OmniDocBench format):
 
 ```bash
 # (a) crop + edit each table region
@@ -199,7 +199,7 @@ bash evaluation/ocr_eval/run_eval_ocr.sh \
     /path/to/<model>_table_ocr
 ```
 
-For *local* (edit-region-only) evaluation — uses the human-labeled bboxes:
+For *local* (edit-region-only) evaluation, use the human-labeled bboxes:
 
 ```bash
 bash evaluation/ocr_eval/run_eval_ocr_local.sh \
@@ -208,7 +208,7 @@ bash evaluation/ocr_eval/run_eval_ocr_local.sh \
     /path/to/<model>_table_ocr
 ```
 
-Metrics reported per block & aggregated:
+Metrics reported per block and in aggregate:
 
 | Metric | Level | Notes |
 |--------|-------|-------|
@@ -257,7 +257,7 @@ python evaluation/agreement/krippendorff_alpha.py \
 
 ## Data Format
 
-**Editing-item** JSON (what each benchmark entry looks like):
+**Editing item** JSON (the format of each benchmark entry):
 
 ```json
 {
@@ -298,4 +298,3 @@ If you find VDE-Bench useful, please cite:
 
 This project is released under the [Apache License 2.0](./LICENSE).
 The underlying document data may be subject to separate licenses from their respective source datasets (e.g. OmniDocBench). Please consult those repositories before redistribution.
-# VDE-bench
