@@ -1,16 +1,34 @@
+# VDE-Bench: Visual Document Editing Benchmark
+
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/abs/2602.00122)
+[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+[![Official Benchmark](https://img.shields.io/badge/🤗%20Hugging%20Face-Official%20Benchmark-FFD21E)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+
+[[Paper]](https://arxiv.org/abs/2602.00122)
+[[Dataset]](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+[[Dataset Mirror]](https://hf-mirror.com/datasets/hongzhuyi/VDEBench)
+
+[English](README.md) | [Simplified Chinese](README_zh.md) | [News](#news) | [Quick Start](#quick-start)
+
+## News
+
+- 📄 **2026-01-27 — arXiv:** The first version of our [paper](https://arxiv.org/abs/2602.00122v1) was submitted to arXiv!
+- 🤗 **2026-10-28 — Hugging Face Official Benchmark:** VDE-Bench is now an **official benchmark on the Hugging Face Hub**, with a live leaderboard for local and global document-editing evaluation. 🎉 Thanks to the Hugging Face team for supporting the integration! [Dataset & leaderboard](https://huggingface.co/datasets/hongzhuyi/VDEBench) · [Hugging Face confirmation](https://huggingface.co/datasets/hongzhuyi/VDEBench/discussions/2#6ae1ea439ae693f8c312af8d).
+
+## Introduction
+
+**VDE-Bench (Visual Document Editing Benchmark)** evaluates how well image-editing models follow natural-language instructions to make precise changes to **dense Chinese and English document images**. Models must locate and edit the requested text or table content while preserving the surrounding text, table structure, typography, and page layout.
+
+The benchmark contains **3,506 instruction-guided editing examples**, comprising **1,578 text-region edits** and **1,928 table-region edits** across **seven task types**: text replacement, addition, and deletion; table text modification, addition, and deletion; and table structure editing. Each example pairs an input image, an editing instruction, and a reference target image with editing-region and structured OCR annotations.
+
+VDE-Bench combines **local edit-region evaluation** with **global full-page evaluation** to assess textual correctness, structural fidelity, and visual content preservation. The evaluation toolkit includes OCR-based metrics (IoU, CDM, BLEU, and TEDS) and image-quality metrics (PSNR, SSIM, LPIPS, FID, and CLIP Score). The dataset and its official Hub leaderboard are available on [Hugging Face](https://huggingface.co/datasets/hongzhuyi/VDEBench); this repository provides the data-generation and evaluation code.
 
 ![VDE-Bench Overview](vdebench_overview_en.png)
-# VDE-Bench: Visual Document Edit Benchmark
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/pdf/2602.00122v2)
-[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
-
-[[Paper]](https://arxiv.org/pdf/2602.00122v2)
-[[Dataset]](https://huggingface.co/datasets/hongzhuyi/VDEBench)
-
-**VDE-Bench** evaluates visual document editing on dense document pages with bilingual (English / Chinese) text, tables, and figures. It combines automatic text and layout generation with OCR-based and perceptual image-quality metrics.
+## Repository Contents
 
 This repository contains:
+
 1. **Data generation pipeline** (`data_generation/`): scripts that build the benchmark by calling a multimodal LLM on source document images such as [OmniDocBench](https://github.com/opendatalab/OmniDocBench).
 2. **OCR and layout evaluation** (`evaluation/ocr_eval/`): the main OCR benchmark, with per-block IoU, CDM, BLEU, and TEDS metrics at both *global* and *local (edit-region)* levels.
 3. **Image-quality evaluation** (`evaluation/image_quality/`): perceptual metrics including PSNR, SSIM, LPIPS, FID, and CLIP Score.
@@ -25,6 +43,9 @@ This repository contains:
 
 ## Table of Contents
 
+- [News](#news)
+- [Introduction](#introduction)
+- [Repository Contents](#repository-contents)
 - [Installation](#installation)
 - [Repository Layout](#repository-layout)
 - [Quick Start](#quick-start)
@@ -134,7 +155,8 @@ VDE-Bench/
 ├── requirements.txt
 ├── LICENSE
 ├── .gitignore
-└── README.md
+├── README.md                   # English documentation
+└── README_zh.md                # Simplified Chinese documentation
 ```
 
 ---
