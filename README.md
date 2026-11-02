@@ -1,16 +1,42 @@
+# VDE-Bench: Visual Document Editing Benchmark
+
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/abs/2602.00122)
+[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+[![Official Benchmark](https://img.shields.io/badge/🤗%20Hugging%20Face-Official%20Benchmark-FFD21E)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+
+[[Paper]](https://arxiv.org/abs/2602.00122)
+[[Dataset]](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+[[Dataset Mirror / 数据集镜像]](https://hf-mirror.com/datasets/hongzhuyi/VDEBench)
+
+[English](#english-introduction) | [简体中文](#中文介绍) | [News / 最新动态](#news) | [Quick Start](#quick-start)
+
+## News
+
+- **2026-01-27 — arXiv:** The first version of our [paper](https://arxiv.org/abs/2602.00122v1) was submitted to arXiv. / 论文首版提交至 arXiv。
+- **2026-10-28 — Hugging Face Official Benchmark:** VDE-Bench is now an **official benchmark on the Hugging Face Hub**, with a live leaderboard for local and global document-editing evaluation. Thanks to the Hugging Face team for supporting the integration! [Dataset & leaderboard](https://huggingface.co/datasets/hongzhuyi/VDEBench) · [Hugging Face confirmation](https://huggingface.co/datasets/hongzhuyi/VDEBench/discussions/2#6ae1ea439ae693f8c312af8d). / VDE-Bench 已被 **Hugging Face 官方收录为 Hub 官方评测基准**，局部编辑与整页评测排行榜正式上线。感谢 Hugging Face 团队的支持！
+
+## English Introduction
+
+**VDE-Bench (Visual Document Editing Benchmark)** evaluates how well image-editing models follow natural-language instructions to make precise changes to **dense Chinese and English document images**. Models must locate and edit the requested text or table content while preserving the surrounding text, table structure, typography, and page layout.
+
+The benchmark contains **3,506 instruction-guided editing examples**, comprising **1,578 text-region edits** and **1,928 table-region edits** across **seven task types**: text replacement, addition, and deletion; table text modification, addition, and deletion; and table structure editing. Each example pairs an input image, an editing instruction, and a reference target image with editing-region and structured OCR annotations.
+
+VDE-Bench combines **local edit-region evaluation** with **global full-page evaluation** to assess textual correctness, structural fidelity, and visual content preservation. The evaluation toolkit includes OCR-based metrics (IoU, CDM, BLEU, and TEDS) and image-quality metrics (PSNR, SSIM, LPIPS, FID, and CLIP Score). The dataset and its official Hub leaderboard are available on [Hugging Face](https://huggingface.co/datasets/hongzhuyi/VDEBench); this repository provides the data-generation and evaluation code.
+
+## 中文介绍
+
+**VDE-Bench（视觉文档编辑评测基准）**用于评估图像编辑模型能否遵循自然语言指令，对**中文和英文的高密度文档图像**进行精确修改。模型需要准确定位并编辑指定的文本或表格内容，同时保持周围文字、表格结构、字体样式和页面布局。
+
+基准包含 **3,506 个指令驱动的编辑样本**，其中包括 **1,578 个文本区域编辑样本**和 **1,928 个表格区域编辑样本**，覆盖**七类任务**：文本替换、新增与删除，表格内文字修改、新增与删除，以及表格结构编辑。每个样本均提供输入图像、编辑指令、参考目标图像，以及编辑区域和结构化 OCR 标注。
+
+VDE-Bench 结合**局部编辑区域评测**与**全局整页评测**，从文本正确性、结构保真度和视觉内容保持三个方面衡量编辑质量。评测工具包括基于 OCR 的指标（IoU、CDM、BLEU、TEDS）和图像质量指标（PSNR、SSIM、LPIPS、FID、CLIP Score）。数据集及其 Hub 官方排行榜已上线 [Hugging Face](https://huggingface.co/datasets/hongzhuyi/VDEBench)（[国内镜像](https://hf-mirror.com/datasets/hongzhuyi/VDEBench)）；本仓库提供数据生成与评测代码。
 
 ![VDE-Bench Overview](vdebench_overview_en.png)
-# VDE-Bench: Visual Document Edit Benchmark
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/pdf/2602.00122v2)
-[![Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
-
-[[Paper]](https://arxiv.org/pdf/2602.00122v2)
-[[Dataset]](https://huggingface.co/datasets/hongzhuyi/VDEBench)
-
-**VDE-Bench** evaluates visual document editing on dense document pages with bilingual (English / Chinese) text, tables, and figures. It combines automatic text and layout generation with OCR-based and perceptual image-quality metrics.
+## Repository Contents
 
 This repository contains:
+
 1. **Data generation pipeline** (`data_generation/`): scripts that build the benchmark by calling a multimodal LLM on source document images such as [OmniDocBench](https://github.com/opendatalab/OmniDocBench).
 2. **OCR and layout evaluation** (`evaluation/ocr_eval/`): the main OCR benchmark, with per-block IoU, CDM, BLEU, and TEDS metrics at both *global* and *local (edit-region)* levels.
 3. **Image-quality evaluation** (`evaluation/image_quality/`): perceptual metrics including PSNR, SSIM, LPIPS, FID, and CLIP Score.
@@ -25,6 +51,10 @@ This repository contains:
 
 ## Table of Contents
 
+- [News](#news)
+- [English Introduction](#english-introduction)
+- [中文介绍](#中文介绍)
+- [Repository Contents](#repository-contents)
 - [Installation](#installation)
 - [Repository Layout](#repository-layout)
 - [Quick Start](#quick-start)
