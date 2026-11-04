@@ -1,54 +1,118 @@
-# VDE-Bench：视觉文档编辑评测基准
+<div align="center">
 
-[![论文](https://img.shields.io/badge/%E8%AE%BA%E6%96%87-arXiv-b31b1b)](https://arxiv.org/abs/2602.00122)
-[![数据集](https://img.shields.io/badge/%E6%95%B0%E6%8D%AE%E9%9B%86-Hugging%20Face-yellow)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
-[![Hugging Face 官方评测基准](https://img.shields.io/badge/Hugging%20Face-%E5%AE%98%E6%96%B9%E8%AF%84%E6%B5%8B%E5%9F%BA%E5%87%86-FFD21E)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+# 📄 VDE-Bench：视觉文档编辑评测基准
 
-[[论文]](https://arxiv.org/abs/2602.00122)
-[[数据集]](https://huggingface.co/datasets/hongzhuyi/VDEBench)
-[[数据集镜像]](https://hf-mirror.com/datasets/hongzhuyi/VDEBench)
+**“精准编辑目标文本与表格，完整保留文档其余版面与内容。”**
 
-[英文版](README.md) | [简体中文](README_zh.md) | [最新动态](#最新动态) | [快速开始](#快速开始)
+*面向中英文高密度文档图像的指令驱动编辑评测基准*
+
+[![论文](https://img.shields.io/badge/%E8%AE%BA%E6%96%87-arXiv%202602.00122-b31b1b?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2602.00122)
+[![数据集](https://img.shields.io/badge/🤗%20%E6%95%B0%E6%8D%AE%E9%9B%86-VDEBench-FFD21E?style=flat-square)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+[![Hugging Face 官方评测基准](https://img.shields.io/badge/🤗%20Hugging%20Face-%E5%AE%98%E6%96%B9%E8%AF%84%E6%B5%8B%E5%9F%BA%E5%87%86-FF9D00?style=flat-square)](https://huggingface.co/datasets/hongzhuyi/VDEBench)
+[![数据集镜像](https://img.shields.io/badge/%E9%95%9C%E5%83%8F-HF--Mirror-00A67E?style=flat-square)](https://hf-mirror.com/datasets/hongzhuyi/VDEBench)
+[![许可证](https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-Apache%202.0-blue?style=flat-square)](./LICENSE)
+
+**[英文版](README.md)** · **[简体中文](README_zh.md)**
+
+[最新动态](#最新动态) · [核心亮点](#核心亮点) · [评测榜单](#评测榜单) · [任务体系与数据分布](#任务体系与数据分布) · [快速开始](#快速开始) · [引用](#引用)
+
+</div>
+
+---
+
+<div align="center">
+
+| 样本总数 | 文本区域编辑 | 表格区域编辑 | 覆盖语言 | 任务类型 | 评测粒度 |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **3,506** | **1,578** | **1,928** | **中文 · 英文** | **7 类** | **局部区域 · 全局整页** |
+
+</div>
 
 ## 最新动态
 
-- 📄 **2026-01-27 — arXiv 论文：** 我们的[论文首版](https://arxiv.org/abs/2602.00122v1)已提交至 arXiv！
-- 🤗 **2026-10-28 — Hugging Face 官方收录：** VDE-Bench 已被 **Hugging Face 官方收录为 Hub 官方评测基准**，局部编辑与整页评测排行榜正式上线！🎉 感谢 Hugging Face 团队的支持！[数据集与排行榜](https://huggingface.co/datasets/hongzhuyi/VDEBench) · [官方确认](https://huggingface.co/datasets/hongzhuyi/VDEBench/discussions/2#6ae1ea439ae693f8c312af8d)。
+- 🚀 **2026-11-01 — 主流模型全量评测榜单发布：** 六款主流图像编辑模型（`FLUX.2-klein-4B`、`BAGEL-7B-MoT`、`Qwen-Image-Edit-2511`、`FireRed-Image-Edit-1.1`、`Qwen-Image-Edit-2509`、`OmniGen2`）在全部 **3,506 个测试样本**上的**局部（Local）**与**全局（Global）**评测结果已上线 [Hugging Face 评测榜单](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/README.md)。
+- 🤗 **2026-10-28 — Hugging Face 官方收录：** VDE-Bench 已被 **Hugging Face 官方收录为 Hub 官方评测基准**，局部编辑与整页评测排行榜正式上线！🎉 感谢 Hugging Face 团队的支持！[[数据集与排行榜]](https://huggingface.co/datasets/hongzhuyi/VDEBench) · [[数据集镜像]](https://hf-mirror.com/datasets/hongzhuyi/VDEBench) · [[官方确认]](https://huggingface.co/datasets/hongzhuyi/VDEBench/discussions/2#6ae1ea439ae693f8c312af8d)
 
 ## 项目介绍
 
 **VDE-Bench（视觉文档编辑评测基准）**用于评估图像编辑模型能否遵循自然语言指令，对**中文和英文的高密度文档图像**进行精确修改。模型需要准确定位并编辑指定的文本或表格内容，同时保持周围文字、表格结构、字体样式和页面布局。
 
-基准包含 **3,506 个指令驱动的编辑样本**，其中包括 **1,578 个文本区域编辑样本**和 **1,928 个表格区域编辑样本**，覆盖**七类任务**：文本替换、新增与删除，表格内文字修改、新增与删除，以及表格结构编辑。每个样本均提供输入图像、编辑指令、参考目标图像，以及编辑区域和结构化 OCR 标注。
+基准包含 **3,506 个指令驱动的编辑样本**，其中包括 **1,578 个文本区域编辑样本**和 **1,928 个表格区域编辑样本**，覆盖**七类任务**：文本替换、新增与删除，表格内文字修改、新增与删除，以及表格结构编辑。每个样本均提供输入图像、自然语言编辑指令、参考目标图像，以及允许编辑区域掩码、实际变更像素掩码与结构化 OCR 标注。
 
-VDE-Bench 结合**局部编辑区域评测**与**全局整页评测**，从文本正确性、结构保真度和视觉内容保持三个方面衡量编辑质量。评测工具包括基于 OCR 的指标（IoU、CDM、BLEU、TEDS）和图像质量指标（PSNR、SSIM、LPIPS、FID、CLIP Score）。数据集及其 Hub 官方排行榜已上线 [Hugging Face](https://huggingface.co/datasets/hongzhuyi/VDEBench)；本仓库提供数据生成与评测代码。
+<p align="center">
+  <img src="vdebench_overview_en.png" alt="VDE-Bench 总览" width="100%">
+</p>
 
-![VDE-Bench 总览](vdebench_overview_en.png)
+## 核心亮点
+
+- **🎯 真实高密度双语文档场景：** 样本精选自多样化的中英文真实文档页面（涵盖 [OmniDocBench](https://github.com/opendatalab/OmniDocBench)、[DocGenome](https://huggingface.co/datasets/U4R/DocGenome) 与 [DocLayNet](https://github.com/DS4SD/DocLayNet)），考察模型在紧密耦合版面中的细粒度编辑能力。
+- **🧩 七大细粒度文档编辑任务：** 系统覆盖**文本替换**、**文本新增**、**文本删除**、**表格文字修改**、**表格文字新增**、**表格文字删除**以及**表格结构编辑**。
+- **⚖️ 局部与全局双粒度评测协议：** 同时开展**局部编辑区域（Local）**与**全局整页（Global）**评测，既检验目标区域是否按指令精准修改，也检验未编辑区域是否保持零误伤。
+- **📐 多维度综合指标体系：** 融合文本与结构解析指标（`IoU`、`CDM`、`BLEU-4`、`TEDS`）以及感知与语义图像质量指标（`PSNR`、`SSIM`、`LPIPS`、`FID`、`CLIP Score`）。
+- **🛠️ 开箱即用的完整开源工具链：** 提供 Hugging Face Parquet 流式数据加载、多模态大模型数据合成流水线、基于 vLLM 的 OCR 推理后端（`PaddleOCR-VL`、`Hunyuan OCR`）、版面元素统计以及人工评分一致性分析（`Fleiss' Kappa`、`Krippendorff's Alpha`）。
+
+## 评测榜单
+
+下表展示了六款主流图像编辑模型在全部 **3,506 个测试样本**（`default/test` 划分）上的完整评测结果。**局部得分（Local）**为主榜单核心指标；局部与全局得分均取四项块级汇总 OCR 指标的等权均值 `(IoU + CDM + BLEU-4 + TEDS) / 4`（范围 `0–1`，越高越好）。
+
+<div align="center">
+
+| 排名 | 模型 | 局部得分 Local ↑ *(核心指标)* | 全局得分 Global ↑ | 详细分项结果 |
+|:---:|---|:---:|:---:|:---:|
+| 🥇 | **[FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B)** | **0.767** | **0.807** | [JSON](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/flux2_klein_4b/results.json) |
+| 🥈 | **[BAGEL-7B-MoT](https://huggingface.co/ByteDance-Seed/BAGEL-7B-MoT)** | **0.706** | **0.786** | [JSON](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/bagel_7b_mot/results.json) |
+| 🥉 | **[Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511)** | **0.656** | 0.699 | [JSON](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/qwen_image_edit_2511/results.json) |
+| 4 | **[FireRed-Image-Edit-1.1](https://huggingface.co/FireRedTeam/FireRed-Image-Edit-1.1)** | 0.638 | 0.750 | [JSON](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/firered_image_edit_1_1/results.json) |
+| 5 | **[Qwen-Image-Edit-2509](https://huggingface.co/Qwen/Qwen-Image-Edit-2509)** | 0.618 | 0.639 | [JSON](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/qwen_image_edit_2509/results.json) |
+| 6 | **[OmniGen2](https://huggingface.co/OmniGen2/OmniGen2)** | 0.565 | 0.581 | [JSON](https://huggingface.co/datasets/hongzhuyi/VDEBench/blob/main/results/2026-11-01/omnigen2/results.json) |
+
+</div>
+
+> 💡 交互式完整榜单及更多早期模型结果请访问 [Hugging Face 数据集主页](https://huggingface.co/datasets/hongzhuyi/VDEBench)（或通过 [HF-Mirror 镜像](https://hf-mirror.com/datasets/hongzhuyi/VDEBench) 查看）。
+
+## 任务体系与数据分布
+
+所有配置均通过统一的 `test` 划分提供评测基准。`default` 配置包含全部 **3,506** 个样本，`text` 与 `table` 分别对应文本与表格两个子集：
+
+<div align="center">
+
+| 区域子集 | 编辑任务类型 | 样本数 | 占比 | 核心考察点 |
+|---|---|---:|---:|---|
+| **文本区域** (`1,578`) | 文本替换 | 575 | 16.4% | 字符精准替换与字体样式一致性 |
+| **文本区域** (`1,578`) | 文本新增 | 504 | 14.4% | 行或段落插入及局部排版自适应 |
+| **文本区域** (`1,578`) | 文本删除 | 499 | 14.2% | 干净移除指定文字并自然修复背景 |
+| **表格区域** (`1,928`) | 表格文字修改 | 524 | 14.9% | 单元格内文字修改且不破坏表格边框 |
+| **表格区域** (`1,928`) | 表格文字新增 | 472 | 13.5% | 填入单元格内容并保持行列对齐 |
+| **表格区域** (`1,928`) | 表格文字删除 | 472 | 13.5% | 清空单元格内容同时完整保留表格线 |
+| **表格区域** (`1,928`) | 表格结构编辑 | 460 | 13.1% | 行列增删与单元格合并拆分（`TEDS`） |
+| **总计** | **7 类任务** | **3,506** | **100.0%** | **局部编辑区域 + 全局整页联合评估** |
+
+</div>
 
 ## 仓库内容
 
-本仓库包含以下模块：
-
-1. **数据生成流程**（`data_generation/`）：调用多模态大语言模型，基于 [OmniDocBench](https://github.com/opendatalab/OmniDocBench) 等来源的文档图像构建评测数据。
-2. **OCR 与版面评测**（`evaluation/ocr_eval/`）：主要 OCR 评测模块，在*全局整页*和*局部编辑区域*两个层面计算块级 IoU、CDM、BLEU 和 TEDS 指标。
-3. **图像质量评测**（`evaluation/image_quality/`）：计算 PSNR、SSIM、LPIPS、FID 和 CLIP Score 等图像质量指标。
-4. **版面分析**（`evaluation/layout_analysis/`）：使用视觉大语言模型提取文档版面元素并统计其分布。
-5. **标注者一致性分析**（`evaluation/agreement/`）：提供 Fleiss' Kappa 和 Krippendorff's Alpha 的实现，用于分析人工评分的一致性。
-6. **数据集统计与报告**（`analysis/`）：绘制数据分布图，并生成论文使用的 LaTeX 表格。
-7. **OCR 后端**（`ocr_backends/`）：提供 PaddleOCR-VL 和 Hunyuan OCR 的配置示例。
-
-> 图像、编辑指令、OCR 输出和人工标注等评测数据单独发布于 [Hugging Face](https://huggingface.co/datasets/hongzhuyi/VDEBench)。本仓库存放代码。
-
----
+| 模块名称 | 路径 | 功能说明 |
+|---|---|---|
+| **数据生成流程** | `data_generation/` | 调用多模态大语言模型完成区域裁剪编辑、指令合成与高质量样本筛选 |
+| **OCR 与版面评测** | `evaluation/ocr_eval/` | 核心 OCR 评测模块，支持全局与局部模式下的 `IoU`、`CDM`、`BLEU-4`、`TEDS` 计算 |
+| **图像质量评测** | `evaluation/image_quality/` | 计算 `PSNR`、`SSIM`、`LPIPS`、`FID` 与 `CLIP Score` 等感知和语义指标 |
+| **版面分析** | `evaluation/layout_analysis/` | 基于视觉大语言模型提取文档版面元素、生成热力图与空间分布报告 |
+| **标注者一致性分析** | `evaluation/agreement/` | 提供 `Fleiss' Kappa` 与 `Krippendorff's Alpha` 实现，评估人工评分一致性 |
+| **数据集统计与报告** | `analysis/` | 绘制数据集分布统计图、分语言与分任务指标汇总及论文 LaTeX 表格生成 |
+| **OCR 后端** | `ocr_backends/` | 提供 `PaddleOCR-VL`（基于 vLLM）和 `Hunyuan OCR` 的服务部署与客户端脚本 |
 
 ## 目录
 
 - [最新动态](#最新动态)
 - [项目介绍](#项目介绍)
+- [核心亮点](#核心亮点)
+- [评测榜单](#评测榜单)
+- [任务体系与数据分布](#任务体系与数据分布)
 - [仓库内容](#仓库内容)
 - [安装](#安装)
 - [目录结构](#目录结构)
 - [快速开始](#快速开始)
+  - [0. 从 Hugging Face 加载数据集](#0-从-hugging-face-加载数据集)
   - [1. 生成评测数据](#1-生成评测数据)
   - [2. 对模型预测图像运行 OCR](#2-对模型预测图像运行-ocr)
   - [3. 基于 OCR 的评测](#3-基于-ocr-的评测)
@@ -80,6 +144,9 @@ pip install -r evaluation/layout_analysis/requirements.txt
 ---
 
 ## 目录结构
+
+<details open>
+<summary><strong>点击展开或折叠完整目录树</strong></summary>
 
 ```text
 VDE-Bench/
@@ -159,9 +226,32 @@ VDE-Bench/
 └── README_zh.md                # 简体中文文档
 ```
 
+</details>
+
 ---
 
 ## 快速开始
+
+### 0. 从 Hugging Face 加载数据集
+
+可以直接通过 `datasets` 库流式读取或下载完整评测数据，无需手动解压归档文件：
+
+```python
+from datasets import load_dataset
+
+# 可选配置：name="default"（全部 3,506 条）、"text"（1,578 条）或 "table"（1,928 条）
+ds = load_dataset(
+    "hongzhuyi/VDEBench",
+    name="default",
+    split="test",
+    streaming=True,
+)
+
+example = next(iter(ds))
+print(example["id"], example["instruction"])
+example["image_input"].save("input.png")
+example["image_output"].save("reference.png")
+```
 
 所有调用托管大语言模型服务、使用兼容 OpenAI 接口的脚本，都需要配置以下环境变量：
 
@@ -308,9 +398,10 @@ python evaluation/agreement/krippendorff_alpha.py \
 ```bibtex
 @article{yi2026vdebench,
   title   = {VDE Bench: Evaluating The Capability of Image Editing Models to Modify Visual Documents},
-  author  = {Yi, Hongzhu and Yang, Yujia and Wang, Yuanxiang and Guan, Zhenyu and Chen, Jiahuan and Bao, Chenxi and Yang, Tiankun and Yuan, Yixuan and Zong, Tianyu and Wang, Xinming and Yu, Tao and Tao, Ruiwen and Liang, Haijin and Ma, Jin and Luo, Jinwen and Zuo, Yeshani Xinyu and Xu, Jungang},
+  author  = {Yi, Hongzhu and Yang, Yujia and Wang, Yuanxiang and Li, Tong and Guan, Zhenyu and Zong, Tianyu and Chen, Jiahuan and Bao, Chenxi and Yang, Tiankun and Jin, Haopeng and Yuan, Yixuan and Wang, Xinming and Yu, Tao and Gao, Ruilin and Tao, Ruiwen and Liang, Haijin and Ma, Jin and Luo, Jinwen and Yeshani and Zuo, Xinyu and Xu, Jungang},
   journal = {arXiv preprint arXiv:2602.00122},
-  year    = {2026}
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2602.00122}
 }
 ```
 
